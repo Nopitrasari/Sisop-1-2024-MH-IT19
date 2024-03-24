@@ -5,12 +5,15 @@
 5. awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv
 6. awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv | sort -k2nr
 7.  awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv | sort -k2nr | head -n1
+catatan : poin 5-6 untuk menampilkan jawaban dari soal 1A yaitu untuk menampilkan nama pembeli dan sales.
 8.  awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv
 9.  awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv | sort -k2n
 10. awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv | sort -k2n | head -n1
+catatan : poin 8 -10 untuk menampilkan jawaban dari soal 1B yaitu untuk menampilkan customer segment yang memiliki profit paling kecil.
 11. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv
 12. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv | sort -k2nr
 13. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv | sort -k2nr | head -n3
+catatan : poin 11-13 untuk menampilkan jawaban dari soal 1C yaitu untuk menampilkan 3 category yang memiliki total profit paling tinggi.
 14. grep 'adriaens' Sandbox.csv | awk -F ',' '{print $2, $3}'
 15. awk -F ',' '$1=="adriaens" {print $2, $3}' Sandbox.csv
 16. grep 'adriaens' Sandbox.csv | awk -F ',' '{print $2, $4}'
@@ -19,3 +22,4 @@
 19. grep 'Adriaens' Sandbox.csv | awk -F ',' '{print $2, $6, $17}'
 
 pada point 14-17 saya mengalami kesulitan disitu 'Adriaens' belum muncul lalu di point 18-19 'Adriaens' nya baru muncul.
+
