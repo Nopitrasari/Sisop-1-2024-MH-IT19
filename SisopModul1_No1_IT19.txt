@@ -1,0 +1,21 @@
+1. wget --no-check-certificate 'https://drive.google.com/uc?export=download&id=1cC6MYBI3wRwDgqlFQE1OQUN83JAreId0' -O Sandbox.csv
+2. ls
+3.  cat Sandbox.csv
+4. less Sandbox.csv
+5. awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv
+6. awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv | sort -k2nr
+7.  awk -F ',' '{sales[$1] += $3 * $4} END {for (buyer in sales) print buyer, sales[buyer]}' Sandbox.csv | sort -k2nr | head -n1
+8.  awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv
+9.  awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv | sort -k2n
+10. awk -F ',' '{profit[$2] += $3 * $4 - $5} END {for (segment in profit) print segment, profit[segment]}' Sandbox.csv | sort -k2n | head -n1
+11. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv
+12. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv | sort -k2nr
+13. awk -F ',' '{profit[$6] += $3 * $4 - $5} END {for (category in profit) print category, profit[category]}' Sandbox.csv | sort -k2nr | head -n3
+14. grep 'adriaens' Sandbox.csv | awk -F ',' '{print $2, $3}'
+15. awk -F ',' '$1=="adriaens" {print $2, $3}' Sandbox.csv
+16. grep 'adriaens' Sandbox.csv | awk -F ',' '{print $2, $4}'
+17. grep 'adriaens' Sandbox.csv
+18. awk '/Adriaens/ {print}' Sandbox.csv
+19. grep 'Adriaens' Sandbox.csv | awk -F ',' '{print $2, $6, $17}'
+
+pada point 14-17 saya mengalami kesulitan disitu 'Adriaens' belum muncul lalu di point 18-19 'Adriaens' nya baru muncul.
