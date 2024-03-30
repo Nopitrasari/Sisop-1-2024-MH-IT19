@@ -325,6 +325,8 @@ dari
 
 menjadi 
 
+![image](https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/151911480/0a0120fe-9aba-4219-b621-c28883b5be64)
+
 # REVISI
 yang direvisi : 
 
@@ -333,8 +335,6 @@ yang direvisi :
 
 ```
 sebelum direvisi tidak mengalami perubahan 
-
-![image](https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/151911480/0a0120fe-9aba-4219-b621-c28883b5be64)
 
 ```
 elif [ "$action" == "3" ]; then
