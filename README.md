@@ -42,4 +42,25 @@ D. Karena ada seseorang yang lapor kepada Cipung dan Abe bahwa pesanannya tidak 
 Berikut adalah hasil yang sudah direvisi. 
 
 
+# SOAL 2
+Oppie merupakan seorang peneliti bom atom, ia ingin merekrut banyak peneliti lain untuk mengerjakan proyek bom atom nya, Oppie memiliki racikan bom atom rahasia yang hanya bisa diakses penelitinya yang akan diidentifikasi sebagai user, Oppie juga memiliki admin yang bertugas untuk memanajemen peneliti,  bantulah oppie untuk membuat program yang akan memudahkan tugasnya 
+A. Buatlah 2 program yaitu login.sh dan register.sh
+B. Setiap admin maupun user harus melakukan register terlebih dahulu menggunakan email, username, pertanyaan keamanan dan jawaban, dan password
+C. Username yang dibuat bebas, namun email bersifat unique. setiap email yang mengandung kata admin akan dikategorikan menjadi admin 
+D. Karena resep bom atom ini sangat rahasia Oppie ingin password nya memuat keamanan tingkat tinggi
+      a. Password tersebut harus di encrypt menggunakan base64
+      b. Password yang dibuat harus lebih dari 8 karakter
+      c. Harus terdapat paling sedikit 1 huruf kapital dan 1 huruf kecil
+      d. Harus terdapat paling sedikit 1 angka 
+E. Karena Oppie akan memiliki banyak peneliti dan admin ia berniat untuk menyimpan seluruh data register yang ia lakukan ke dalam folder users file users.txt. Di dalam file tersebut, terdapat catatan seluruh email, username, pertanyaan keamanan dan jawaban, dan password hash yang telah ia buat.
+# PENYELESAIAN
+# register.sh
+echo "WELCOME TO REGISTRASION SYSTEM"
+read -p "enter your email : " email
+read -p "enter your username : " username
+read -p "security question : " security_question
+read -p "security answer : " security_answer
+read -s -p "enter a pasword: " password
+
+ini adalah jawaban untuk yang soal B, untuk register akan disuruh untuk mengisi email, username, pernyataan keamanan dan jawaban, dan password
 
