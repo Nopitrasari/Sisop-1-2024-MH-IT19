@@ -385,14 +385,72 @@ Alyss adalah seorang gamer yang sangat menyukai bermain game Genshin Impact. Kar
 A. Alyss membuat script bernama awal.sh, untuk download file yang diberikan oleh Yanuar dan unzip terhadap  file yang telah diunduh dan decode setiap nama file yang terenkripsi dengan hex . Karena pada file list_character.csv terdapat data lengkap karakter, Alyss ingin merename setiap file berdasarkan file tersebut. Agar semakin rapi, Alyss mengumpulkan setiap file ke dalam folder berdasarkan region tiap karakter
 Format: Region - Nama - Elemen - Senjata.jpg
 
+B. Karena tidak mengetahui jumlah pengguna dari tiap senjata yang ada di folder "genshin_character".Alyss berniat untuk menghitung serta menampilkan jumlah pengguna untuk setiap senjata yang ada
+Format: [Nama Senjata] : [jumlah]
+	 Untuk menghemat penyimpanan. Alyss menghapus file - file yang tidak ia gunakan, yaitu genshin_character.zip, list_character.csv, dan genshin.zip
+
+C. Namun sampai titik ini Alyss masih belum menemukan clue dari the secret picture yang disinggung oleh Yanuar. Dia berpikir keras untuk menemukan pesan tersembunyi tersebut. Alyss membuat script baru bernama search.sh untuk melakukan pengecekan terhadap setiap file tiap 1 detik. Pengecekan dilakukan dengan cara meng-ekstrak sebuah value dari setiap gambar dengan menggunakan command steghide. Dalam setiap gambar tersebut, terdapat sebuah file txt yang berisi string. Alyss kemudian mulai melakukan dekripsi dengan hex pada tiap file txt dan mendapatkan sebuah url. Setelah mendapatkan url yang ia cari, Alyss akan langsung menghentikan program search.sh serta mendownload file berdasarkan url yang didapatkan.
+
+Dalam prosesnya, setiap kali Alyss melakukan ekstraksi dan ternyata hasil ekstraksi bukan yang ia inginkan, maka ia akan langsung menghapus file txt tersebut. Namun, jika itu merupakan file txt yang dicari, maka ia akan menyimpan hasil dekripsi-nya bukan hasil ekstraksi. Selain itu juga, Alyss melakukan pencatatan log pada file image.log untuk setiap pengecekan gambar
+Format: [date] [type] [image_path]
+Ex: 
+[24/03/20 17:18:19] [NOT FOUND] [image_path]
+[24/03/20 17:18:20] [FOUND] [image_path]
+Hasil akhir:
+genshin_character
+search.sh
+awal.sh
+image.log
+[filename].txt
+[image].jpg
+
+# Penyelesaian
+
 Membuat script dengan command 
-nano awal.sh 
+`` nano awal.sh `` \
+
+``
+#!/bin/bash
+#download file
+wget -O genshin.zip 'https://docs.google.com/uc?export=download&id=1oGHdTf4_76_RacfmQIV4i7os4sGwa9vN'
+#unzip filenya terus pindahin ke folder khusus terserah
+unzip genshin.zip -d genshinNo1_folder
+#Decode nama file yang terenkripsi dengan hexadecimal
+cd genshinNo1_folder
+unzip genshin_character.zip
+for genshin_character; do
+    decoded_filename=$(echo "$genshin_character" | xxd -r -p)
+    mv "$genshin_character" "$decoded_filename" 
+#Baca data karakter dari list_character.csv dan menyesuaikan setiap file ke dalam folder sesuai region tiap karakter
+cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mv \"%s - %s - %s - %s.jpg\" \"%s - %s - %s - %s.jpg\"\n", $1, $2, $3, $4, $1, $2, $3, $4 }' | bash
+#buat folder sesuai setiap region karakternya
+cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mkdir -p \"%s\"\n", $1 }' | bash done < list_character.csv ``
+
+Penjelasn Singkat dari script awal.sh, jadi kit pertama perlu mendownload file dari link yang tersedia dengan 
+`` wget -O genshin.zip 'https://docs.google.com/uc?export=download&id=1oGHdTf4_76_RacfmQIV4i7os4sGwa9vN' ``
+
+mengekstrak file zip yang didonwload tadi, lalu saya pindahkan hasil ekstraksi ke folder genshinNo1_folder(folder random)
+``unzip genshin.zip -d genshinNo1_folder``
+``cd genshinNo1_folder`` 
+
+mendecode file list_character.csv dari genshin_character.zip dan sekaligus menyortir file dalam genshin_character agar sesuai region setiap karakter agar ebih rapi den tertata sesuai format yang diminta 
+``
+for genshin_character; do
+    decoded_filename=$(echo "$genshin_character" | xxd -r -p)
+    mv "$genshin_character" "$decoded_filename" 
+#Baca data karakter dari list_character.csv dan menyesuaikan setiap file ke dalam folder sesuai region tiap karakter
+cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mv \"%s - %s - %s - %s.jpg\" \"%s - %s - %s - %s.jpg\"\n", $1, $2, $3, $4, $1, $2, $3, $4 }' | bash
+#buat folder sesuai setiap region karakternya
+cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mkdir -p \"%s\"\n", $1 }' | bash done < list_character.csv 
+``
 
 Kemudian menyimpan dan mengubah permission file script agar dapat dieksekusi
-chmod +x ./awal.sh 
+`` chmod +x ./awal.sh ``
 
 lalu menjalankan scriptnya
+`` bash awal.sh `` atau ``./awalsh``
 
+Output yang diberikan 
 
 
 
