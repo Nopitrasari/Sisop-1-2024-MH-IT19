@@ -39,6 +39,7 @@ D. Karena ada seseorang yang lapor kepada Cipung dan Abe bahwa pesanannya tidak 
   # Dokumentasi Output
 ![output Soal_1](https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/151106171/d5c71589-237a-4a51-bbca-556a24542f7e)
 
+Berikut adalah hasil yang sudah direvisi. 
 
 
 
