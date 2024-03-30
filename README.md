@@ -407,9 +407,10 @@ image.log
 # Penyelesaian
 
 Membuat script dengan command 
-`` nano awal.sh `` \
+`` nano awal.sh `` 
 
-``
+dalam scriptnya  
+```
 #!/bin/bash
 #download file
 wget -O genshin.zip 'https://docs.google.com/uc?export=download&id=1oGHdTf4_76_RacfmQIV4i7os4sGwa9vN'
@@ -424,17 +425,25 @@ for genshin_character; do
 #Baca data karakter dari list_character.csv dan menyesuaikan setiap file ke dalam folder sesuai region tiap karakter
 cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mv \"%s - %s - %s - %s.jpg\" \"%s - %s - %s - %s.jpg\"\n", $1, $2, $3, $4, $1, $2, $3, $4 }' | bash
 #buat folder sesuai setiap region karakternya
-cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mkdir -p \"%s\"\n", $1 }' | bash done < list_character.csv ``
+cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mkdir -p \"%s\"\n", $1 }' | bash done < list_character.csv
+```
 
 Penjelasn Singkat dari script awal.sh, jadi kit pertama perlu mendownload file dari link yang tersedia dengan 
-`` wget -O genshin.zip 'https://docs.google.com/uc?export=download&id=1oGHdTf4_76_RacfmQIV4i7os4sGwa9vN' ``
+```
+wget -O genshin.zip 'https://docs.google.com/uc?export=download&id=1oGHdTf4_76_RacfmQIV4i7os4sGwa9vN'
+```
 
 mengekstrak file zip yang didonwload tadi, lalu saya pindahkan hasil ekstraksi ke folder genshinNo1_folder(folder random)
-``unzip genshin.zip -d genshinNo1_folder``
-``cd genshinNo1_folder`` 
+``` 
+unzip genshin.zip -d genshinNo1_folder
+```
+```
+cd genshinNo1_folder
+``` 
 
-mendecode file list_character.csv dari genshin_character.zip dan sekaligus menyortir file dalam genshin_character agar sesuai region setiap karakter agar ebih rapi den tertata sesuai format yang diminta 
-``
+mendecode file list_character.csv dari genshin_character.zip dan sekaligus menyortir file dalam genshin_character agar sesuai region setiap karakter agar ebih rapi den tertata sesuai format yang diminta
+
+```
 for genshin_character; do
     decoded_filename=$(echo "$genshin_character" | xxd -r -p)
     mv "$genshin_character" "$decoded_filename" 
@@ -442,15 +451,54 @@ for genshin_character; do
 cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mv \"%s - %s - %s - %s.jpg\" \"%s - %s - %s - %s.jpg\"\n", $1, $2, $3, $4, $1, $2, $3, $4 }' | bash
 #buat folder sesuai setiap region karakternya
 cat list_character.csv | sed 's/\r$//' | awk -F ',' '{ printf "mkdir -p \"%s\"\n", $1 }' | bash done < list_character.csv 
-``
+```
 
 Kemudian menyimpan dan mengubah permission file script agar dapat dieksekusi
-`` chmod +x ./awal.sh ``
+```
+chmod +x ./awal.sh
+```
 
 lalu menjalankan scriptnya
-`` bash awal.sh `` atau ``./awalsh``
+```
+bash awal.sh
+```
+atau
+
+```
+./awalsh
+```
 
 Output yang diberikan 
+
+<img width="556" alt="Dokumentasi sisop membuat script" src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/88b85653-7056-4c7b-9c9d-849dab8fac89">
+
+untuk decode filenya sudah berhasil 
+
+<img width="631" alt="Outputnya " src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/d37427e6-fdc5-472c-a6e4-3a8363d990b7">
+
+namun hasil command menunjukkan ada yang error 
+
+<img width="611" alt="Syntax salah" src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/d185b70d-1ad9-4d94-b6f6-1a969af4a71b">
+
+Oleh karena itu, untuk pengerjaan selanjutnya, saya tidak bisa melanjutkan 
+
+# Kendala 
+Syntax di script yang saya buat terdapat sedikit error 
+
+<img width="611" alt="Syntax salah" src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/d185b70d-1ad9-4d94-b6f6-1a969af4a71b">
+
+oleh karena itu, saya menghapus beberapa bagian 
+
+<img width="607" alt="nano awal sh" src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/35853145-0389-4c1c-94c7-a02304dfb1d1">
+
+namun tetap smaa outputnya
+
+<img width="615" alt="Syntax error line 15" src="https://github.com/Nopitrasari/Sisop-1-2024-MH-IT19/assets/149749135/a78ae14d-2435-40f0-8a19-8f691248ba6f">
+
+Kemudian, saya mengelami masalah terkait bagaimana mereanme file banyak kemudian mnyortir sesuai permintaan yang diminta
+
+# Revisi 
+untuk revisi dari saya masih belum nampak bisa menyelesaikan soal nomer 3, dan revisi bisa termauk dari kendala saya
 
 
 
