@@ -501,5 +501,64 @@ Kemudian, saya mengelami masalah terkait bagaimana mereanme file banyak kemudian
 untuk revisi dari saya masih belum nampak bisa menyelesaikan soal nomer 3, dan revisi bisa termauk dari kendala saya
 
 
+# SOAL 4
+4. Stitch sangat senang dengan PC di rumahnya. Suatu hari, PC nya secara tiba-tiba nge-freeze 🤯 Tentu saja, Stitch adalah seorang streamer yang harus setiap hari harus bermain game dan streaming.  Akhirnya, dia membawa PC nya ke tukang servis untuk diperbaiki. Setelah selesai diperbaiki, ternyata biaya perbaikan sangat mahal sehingga dia harus menggunakan uang hasil tabungan nya untuk membayarnya. Menurut tukang servis, masalahnya adalah pada CPU dan GPU yang overload karena gaming dan streaming sehingga mengakibatkan freeze pada PC nya. Agar masalah ini tidak terulang kembali, Stitch meminta kamu untuk membuat sebuah program monitoring resource yang tersedia pada komputer.
+
+Buatlah program monitoring resource pada PC kalian. Cukup monitoring ram dan monitoring size suatu directory. Untuk ram gunakan command `free -m`. Untuk disk gunakan command `du -sh <target_path>`. Catat semua metrics yang didapatkan dari hasil `free -m`. Untuk hasil `du -sh <target_path>` catat size dari path directory tersebut. Untuk target_path yang akan dimonitor adalah /home/{user}/. 
+	a. Masukkan semua metrics ke dalam suatu file log bernama metrics_{YmdHms}.log. {YmdHms} adalah waktu disaat file 	script bash kalian dijalankan. Misal dijalankan pada 2024-03-20 15:00:00, maka file log yang akan tergenerate 		adalah metrics_20240320150000.log. 
+	b. Script untuk mencatat metrics diatas diharapkan dapat berjalan otomatis pada setiap menit. 
+	c. Kemudian, buat satu script untuk membuat agregasi file log ke satuan jam. Script agregasi akan memiliki info 	dari file-file yang tergenerate tiap menit. Dalam hasil file agregasi tersebut, terdapat nilai minimum, maximum, 	dan rata-rata dari tiap-tiap metrics. File agregasi akan ditrigger untuk dijalankan setiap jam secara otomatis. 	Berikut contoh nama file hasil agregasi metrics_agg_2024032015.log dengan format metrics_agg_{YmdH}.log 
+	d. Karena file log bersifat sensitif pastikan semua file log hanya dapat dibaca oleh user pemilik file. 
+Note:
+	- Nama file untuk script per menit adalah minute_log.sh
+	- ama file untuk script agregasi per jam adalah aggregate_minutes_to_hourly_log.shN
+	- Semua file log terletak di /home/{user}/log
+	- Semua konfigurasi cron dapat ditaruh di file skrip .sh nya masing-masing dalam bentuk comment
+ 
+Berikut adalah contoh isi dari file metrics yang dijalankan tiap menit:
+mem_total,mem_used,mem_free,mem_shared,mem_buff,mem_available,swap_total,swap_used,swap_free,path,path_size 15949,10067,308,588,5573,4974,2047,43,2004,/home/user/coba/,74M
+
+Berikut adalah contoh isi dari file aggregasi yang dijalankan tiap jam:
+type,mem_total,mem_used,mem_free,mem_shared,mem_buff,mem_available,swap_total,swap_used,swap_free,path,path_size minimum,15949,10067,223,588,5339,4626,2047,43,1995,/home/user/coba/,50M maximum,15949,10387,308,622,5573,4974,2047,52,2004,/home/user/coba/,74M average,15949,10227,265.5,605,5456,4800,2047,47.5,1999.5,/home/user/coba/,62M
+
+
+# Penyelesaian 
+
+membuat script seperti 
+```
+nano aggreagate_minutes_to_hourly_log.sh
+```
+
+isi file scriptnya seperti ini
+```
+#!/bin/bash
+
+# Mendapatkan tanggal dan waktu saat ini
+timestamp=$(date +"%Y%m%d%H%M%S")
+
+# Mendapatkan metrik RAM menggunakan perintah free -m
+ram_metrics=$(free -m)
+
+# Mendapatkan ukuran direktori target
+target_path="/home/$(whoami)/"
+disk_metrics=$(du -sh $target_path)
+
+# Menyimpan metrik ke dalam file log
+echo "RAM Metrics:" > metrics_$timestamp.log
+echo "$ram_metrics" >> metrics_$timestamp.log
+echo "" >> metrics_$timestamp.log
+echo "Disk Metrics for $target_path:" >> metrics_$timestamp.log
+echo "$disk_metrics" >> metrics_$timestamp.log
+
+echo "Metrics have been logged to metrics_$timestamp.log"
+```
+
+# Kendala
+masih ditemukan beberapa error
+
+# Revisi
+untuk revisi nomer 4 tidak ada
+
+
 
 
