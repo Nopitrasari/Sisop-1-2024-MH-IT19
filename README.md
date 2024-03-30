@@ -556,8 +556,7 @@ echo "Metrics have been logged to metrics_$timestamp.log"
 # Kendala
 masih ditemukan beberapa error
 
-# Revisi
-untuk revisi nomer 4 tidak ada
+
 
 
 
